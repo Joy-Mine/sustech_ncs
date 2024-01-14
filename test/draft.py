@@ -1,8 +1,8 @@
 import numpy as np
-import matplotlib.pyplot as plt
+from multiprocessing import Pool
 
 class NCS:
-    def __init__(self, objective_function, dimensions=30, pop_size=10, sigma=0.2, r=0.8, epoch=10, T_max=30000, scope=None, pre_popu=None, pre_sigma=None, plot=False):
+    def __init__(self, objective_function, dimensions=30, pop_size=10, sigma=0.2, r=0.8, epoch=10, T_max=30000, scope=None, pre_popu=None, pre_sigma=None):
         self.objective_function_individual = objective_function
         self.dimensions = dimensions
         self.pop_size = pop_size
@@ -13,16 +13,11 @@ class NCS:
         self.scope=scope
         self.pre_popu=pre_popu
         self.pre_sigma=pre_sigma
-        self.plot=plot
         # self.pool = Pool()
 
-    def objective_function(self, population):
-        results = []
-        for individual in population:
-            value = self.objective_function_individual(individual)
-            results.append(value)
+    def objective_function(self, population, pool):
+        results = pool.map(self.objective_function_individual, population)
         return np.array(results)
-        # return self.objective_function_individual(population)
 
     def initialize_population(self, pop_size, dimensions, scope):
         if scope is None:
@@ -34,23 +29,31 @@ class NCS:
                 population[:, j] = np.random.uniform(lower_bound, upper_bound, size=pop_size)
             return population
         
-    def gaussian_mutation(self, population, sigma):
-        p = np.copy(population)
-        n, d = population.shape
-        for i in range(n):
-            temp = np.random.normal(0, sigma[i], d)
-            p[i] = p[i] + temp
-            mutated_individual=p[i]
-            for j in range(self.dimensions):
-                lower_bound, upper_bound = self.scope[j]
-                length=upper_bound-lower_bound
-                if mutated_individual[j] < lower_bound:
-                    exceed = (lower_bound - mutated_individual[j])%length
-                    mutated_individual[j] = lower_bound + exceed
-                elif mutated_individual[j] > upper_bound:
-                    exceed = (mutated_individual[j] - upper_bound)%length
-                    mutated_individual[j] = upper_bound - exceed
-        return p
+    # def gaussian_mutation_individual(self, args):
+    #     individual, sigma = args
+    #     temp = np.random.normal(0, sigma, len(individual))
+    #     return individual + temp
+    def gaussian_mutation_individual(self, args):
+        individual, sigma = args
+        temp = np.random.normal(0, sigma, len(individual))
+        mutated_individual = individual + temp
+
+        for i in range(self.dimensions):
+            lower_bound, upper_bound = self.scope[i]
+            length=upper_bound-lower_bound
+            if mutated_individual[i] < lower_bound:
+                exceed = (lower_bound - mutated_individual[i])%length
+                mutated_individual[i] = lower_bound + exceed
+            elif mutated_individual[i] > upper_bound:
+                exceed = (mutated_individual[i] - upper_bound)%length
+                mutated_individual[i] = upper_bound - exceed
+
+        return mutated_individual
+
+
+    def gaussian_mutation(self, population, sigma, pool):
+        p = pool.map(self.gaussian_mutation_individual, zip(population, sigma))
+        return np.array(p)
 
     def bhattacharyya_distance(self, mu_i, sigma_i, mu_j, sigma_j):
         xi_xj = mu_i - mu_j
@@ -87,9 +90,9 @@ class NCS:
                 sigma[i] *= r
         return sigma
 
-    def generateAndEvalChild(self, population, sigma):
-        population_prime = self.gaussian_mutation(population, sigma)
-        f_pop_prime = self.objective_function(population_prime)
+    def generateAndEvalChild(self, population, sigma, pool):
+        population_prime = self.gaussian_mutation(population, sigma, pool)
+        f_pop_prime = self.objective_function(population_prime, pool)
         return population_prime, f_pop_prime
 
     def update_best(self, population_prime, f_pop_prime):
@@ -113,13 +116,12 @@ class NCS:
                 new_population[i] = population_prime[i]
                 count[i]+=1
             else:
-                new_population[i] = xi
+                new_population[i] = population[i]
         return new_population, count
     
+    # dimensions, pop_size, sigma, r, epoch, T_max
     def NCS_run(self):
-        if self.plot:
-            best_f_solutions = []  # 用于存储best_f_solution的历史记录
-            t_values = []  # 用于存储对应的t值
+        pool = Pool()
         if self.pre_popu is None:
             population = self.initialize_population(self.pop_size, self.dimensions, self.scope)
         else:
@@ -127,7 +129,7 @@ class NCS:
         if self.pre_sigma is not None:
             self.sigma=self.pre_sigma
         count = np.full(self.pop_size, 0)
-        f_population = self.objective_function(population)
+        f_population = self.objective_function(population, pool)
         best_index = np.argmin(f_population)
         best_solution = population[best_index]
         best_f_solution = f_population[best_index]
@@ -139,25 +141,16 @@ class NCS:
                 count = np.full(self.pop_size, 0)
             # print(t)
             lambda_t = np.random.normal(1, 0.1 - 0.1 * (t / self.T_max))
-            childPopulaiton, f_childPopulation = self.generateAndEvalChild(population, self.sigma) 
+            childPopulaiton, f_childPopulation = self.generateAndEvalChild(population, self.sigma, pool) 
             new_best_solution, new_best_f_solution = self.update_best(childPopulaiton, f_childPopulation)
             # print(f'allBest is {best_f_solution}, childBest is {new_best_f_solution}')
             if new_best_f_solution < best_f_solution:
                 best_solution = new_best_solution
                 best_f_solution = new_best_f_solution
             population, count = self.update_population(population, f_population, childPopulaiton, f_childPopulation, self.sigma, lambda_t, count, best_f_solution)
-            f_population = self.objective_function(population)
-            if self.plot:
-                best_f_solutions.append(best_f_solution)
-                t_values.append(t)
+            f_population = self.objective_function(population, pool)
+            
             t += 1
-        if self.plot:
-            # 在代码的最后添加以下保存图形的代码
-            plt.plot(t_values, best_f_solutions, label='Best f_solution')
-            plt.xlabel('t')
-            plt.ylabel('Best f_solution')
-            plt.title('Best f_solution over time')
-            plt.legend()
-            plt.savefig('evolution_process.png')  # 将图形保存为PNG文件
-            plt.close()  # 关闭图形显示窗口
+        pool.close()
+        pool.join()
         return best_solution, best_f_solution

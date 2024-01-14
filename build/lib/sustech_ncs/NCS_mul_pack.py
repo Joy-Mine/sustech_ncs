@@ -1,8 +1,9 @@
 import numpy as np
 from multiprocessing import Pool
+import matplotlib.pyplot as plt
 
 class NCS:
-    def __init__(self, objective_function, dimensions=30, pop_size=10, sigma=0.2, r=0.8, epoch=10, T_max=30000, scope=None, pre_popu=None, pre_sigma=None):
+    def __init__(self, objective_function, dimensions=30, pop_size=10, sigma=0.2, r=0.8, epoch=10, T_max=30000, scope=None, pre_popu=None, pre_sigma=None, plot=False):
         self.objective_function_individual = objective_function
         self.dimensions = dimensions
         self.pop_size = pop_size
@@ -13,6 +14,7 @@ class NCS:
         self.scope=scope
         self.pre_popu=pre_popu
         self.pre_sigma=pre_sigma
+        self.plot=plot
         # self.pool = Pool()
 
     def objective_function(self, population, pool):
@@ -122,6 +124,9 @@ class NCS:
     # dimensions, pop_size, sigma, r, epoch, T_max
     def NCS_run(self):
         pool = Pool()
+        if self.plot:
+            best_f_solutions = []  # 用于存储best_f_solution的历史记录
+            t_values = []  # 用于存储对应的t值
         if self.pre_popu is None:
             population = self.initialize_population(self.pop_size, self.dimensions, self.scope)
         else:
@@ -133,29 +138,35 @@ class NCS:
         best_index = np.argmin(f_population)
         best_solution = population[best_index]
         best_f_solution = f_population[best_index]
-        # print(population)
-        # print(f_population)
-        # print(best_f_solution)
         t = 0
         while t < self.T_max:
             if t % self.epoch == 0 and t > 0:
                 self.sigma = self.update_sigma(self.pop_size, self.sigma, count, self.epoch, self.r)
             if t % self.epoch == 0 and t > 0:
                 count = np.full(self.pop_size, 0)
-            print(t)
-            # print(self.sigma)
+            # print(t)
             lambda_t = np.random.normal(1, 0.1 - 0.1 * (t / self.T_max))
             childPopulaiton, f_childPopulation = self.generateAndEvalChild(population, self.sigma, pool) 
             new_best_solution, new_best_f_solution = self.update_best(childPopulaiton, f_childPopulation)
-            print(f'allBest is {best_f_solution}, childBest is {new_best_f_solution}')
+            # print(f'allBest is {best_f_solution}, childBest is {new_best_f_solution}')
             if new_best_f_solution < best_f_solution:
                 best_solution = new_best_solution
                 best_f_solution = new_best_f_solution
             population, count = self.update_population(population, f_population, childPopulaiton, f_childPopulation, self.sigma, lambda_t, count, best_f_solution)
             f_population = self.objective_function(population, pool)
-            
+            if self.plot:
+                best_f_solutions.append(best_f_solution)
+                t_values.append(t)
             t += 1
         pool.close()
         pool.join()
+        if self.plot:
+            # 在代码的最后添加以下保存图形的代码
+            plt.plot(t_values, best_f_solutions, label='Best f_solution')
+            plt.xlabel('t')
+            plt.ylabel('Best f_solution')
+            plt.title('Best f_solution over time')
+            plt.legend()
+            plt.savefig('evolution_process.png')  # 将图形保存为PNG文件
+            plt.close()  # 关闭图形显示窗口
         return best_solution, best_f_solution
-
