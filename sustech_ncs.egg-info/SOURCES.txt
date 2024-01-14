@@ -4,7 +4,6 @@ setup.py
 sustech_ncs/NCS_mul_pack.py
 sustech_ncs/NCS_noMul_pack.py
 sustech_ncs/__init__.py
-sustech_ncs/main.py
 sustech_ncs.egg-info/PKG-INFO
 sustech_ncs.egg-info/SOURCES.txt
 sustech_ncs.egg-info/dependency_links.txt

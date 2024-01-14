@@ -1,20 +1,19 @@
 import numpy as np
-# from NCS_noMul_pack import NCS
-# from NCS_mul_pack import NCS
-# from functions import custom_objective_function
-# import optproblems.cec2005 as benchmark
+import sustech_ncs as ncs
+
 import opfunu.cec_based.cec2005 as benchmark
 from sustech_ncs import NCS
+
 
 if __name__=='__main__':
 
     dimension0=30
-    pop_size0=30 #
-    sigma0=2.0  # 注意sigma不能是整数
-    r0=0.90      #
-    epoch0=40   #
-    T0=4000
-    scope = np.array([[-100, 100]] * dimension0)
+    pop_size0=10 #
+    sigma0=0.2  # 注意sigma不能是整数
+    r0=0.80      #
+    epoch0=10   #
+    T0=30000
+    scope = np.array([[-np.pi, np.pi]] * dimension0)
 
     function=benchmark.F122005(ndim=dimension0).evaluate # opfunu
     # function=benchmark.F1(num_variables=dimension0) # optproblems
