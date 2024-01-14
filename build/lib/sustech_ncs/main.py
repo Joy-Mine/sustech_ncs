@@ -13,7 +13,7 @@ if __name__=='__main__':
     r0=0.90      #
     epoch0=40   #
     T0=4000
-    scope = np.array([[-np.pi, np.pi]] * dimension0)
+    scope = np.array([[-100, 100]] * dimension0)
 
     function=benchmark.F122005(ndim=dimension0).evaluate # opfunu
     # function=benchmark.F1(num_variables=dimension0) # optproblems

@@ -1,7 +1,7 @@
 import numpy as np
 
 class NCS:
-    def __init__(self, objective_function, dimensions, pop_size, sigma, r, epoch, T_max, scope=None):
+    def __init__(self, objective_function, dimensions=30, pop_size=10, sigma=0.2, r=0.8, epoch=10, T_max=30000, scope=None, pre_popu=None, pre_sigma=None):
         self.objective_function_individual = objective_function
         self.dimensions = dimensions
         self.pop_size = pop_size
@@ -10,6 +10,8 @@ class NCS:
         self.epoch = epoch
         self.T_max = T_max
         self.scope=scope
+        self.pre_popu=pre_popu
+        self.pre_sigma=pre_sigma
         # self.pool = Pool()
 
     def objective_function(self, population):
@@ -113,7 +115,12 @@ class NCS:
         return new_population, count
     
     def NCS_run(self):
-        population = self.initialize_population(self.pop_size, self.dimensions, self.scope)
+        if self.pre_popu is None:
+            population = self.initialize_population(self.pop_size, self.dimensions, self.scope)
+        else:
+            population = self.pre_popu
+        if self.pre_sigma is not None:
+            self.sigma=self.pre_sigma
         count = np.full(self.pop_size, 0)
         f_population = self.objective_function(population)
         best_index = np.argmin(f_population)
@@ -124,6 +131,10 @@ class NCS:
         # print(best_f_solution)
         t = 0
         while t < self.T_max:
+            if t % self.epoch == 0 and t > 0:
+                self.sigma = self.update_sigma(self.pop_size, self.sigma, count, self.epoch, self.r)
+            if t % self.epoch == 0 and t > 0:
+                count = np.full(self.pop_size, 0)
             print(t)
             lambda_t = np.random.normal(1, 0.1 - 0.1 * (t / self.T_max))
             childPopulaiton, f_childPopulation = self.generateAndEvalChild(population, self.sigma) 
@@ -134,10 +145,6 @@ class NCS:
                 best_f_solution = new_best_f_solution
             population, count = self.update_population(population, f_population, childPopulaiton, f_childPopulation, self.sigma, lambda_t, count, best_f_solution)
             f_population = self.objective_function(population)
-            if t % self.epoch == 0 and t > 0:
-                self.sigma = self.update_sigma(self.pop_size, self.sigma, count, self.epoch, self.r)
-            if t % self.epoch == 0 and t > 0:
-                count = np.full(self.pop_size, 0)
             
             t += 1
         return best_solution, best_f_solution
