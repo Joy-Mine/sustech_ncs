@@ -1,9 +1,10 @@
 import numpy as np
 # from NCS_noMul_pack import NCS
-from NCS_mul_pack import NCS
+# from NCS_mul_pack import NCS
 # from functions import custom_objective_function
 # import optproblems.cec2005 as benchmark
 import opfunu.cec_based.cec2005 as benchmark
+from sustech_ncs import NCS
 
 if __name__=='__main__':
 
