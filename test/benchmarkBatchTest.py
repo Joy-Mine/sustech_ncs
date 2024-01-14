@@ -40,7 +40,7 @@ if __name__=='__main__':
     # F7
     best=-180
     scope = np.array([[-1000, 1000]] * dimension0)
-    function=benchmark.F62005(ndim=dimension0).evaluate
+    function=benchmark.F72005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
     for i in range(5):
@@ -63,7 +63,7 @@ if __name__=='__main__':
     # F8
     best=-140
     scope = np.array([[-32, 32]] * dimension0)
-    function=benchmark.F62005(ndim=dimension0).evaluate
+    function=benchmark.F82005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
     for i in range(5):
@@ -86,7 +86,7 @@ if __name__=='__main__':
     # F9
     best=-330
     scope = np.array([[-5, 5]] * dimension0)
-    function=benchmark.F62005(ndim=dimension0).evaluate
+    function=benchmark.F92005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
     for i in range(5):
@@ -109,7 +109,7 @@ if __name__=='__main__':
     # F10
     best=-330
     scope = np.array([[-5, 5]] * dimension0)
-    function=benchmark.F62005(ndim=dimension0).evaluate
+    function=benchmark.F102005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
     for i in range(5):
@@ -132,7 +132,7 @@ if __name__=='__main__':
     # F11
     best=90
     scope = np.array([[-0.5, 0.5]] * dimension0)
-    function=benchmark.F62005(ndim=dimension0).evaluate
+    function=benchmark.F112005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
     for i in range(5):
@@ -155,7 +155,7 @@ if __name__=='__main__':
     # F12
     best=-460
     scope = np.array([[-np.pi, np.pi]] * dimension0)
-    function=benchmark.F62005(ndim=dimension0).evaluate
+    function=benchmark.F122005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
     for i in range(5):
@@ -178,7 +178,7 @@ if __name__=='__main__':
     # F13
     best=-130
     scope = np.array([[-5, 5]] * dimension0)
-    function=benchmark.F62005(ndim=dimension0).evaluate
+    function=benchmark.F132005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
     for i in range(5):
@@ -201,7 +201,7 @@ if __name__=='__main__':
     # F14
     best=-300
     scope = np.array([[-100, 100]] * dimension0)
-    function=benchmark.F62005(ndim=dimension0).evaluate
+    function=benchmark.F142005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
     for i in range(5):
@@ -224,7 +224,7 @@ if __name__=='__main__':
     # F15
     best=120
     scope = np.array([[-5, 5]] * dimension0)
-    function=benchmark.F62005(ndim=dimension0).evaluate
+    function=benchmark.F152005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
     for i in range(5):
@@ -247,7 +247,7 @@ if __name__=='__main__':
     # F16
     best=120
     scope = np.array([[-5, 5]] * dimension0)
-    function=benchmark.F62005(ndim=dimension0).evaluate
+    function=benchmark.F162005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
     for i in range(5):
@@ -270,7 +270,7 @@ if __name__=='__main__':
     # F17
     best=120
     scope = np.array([[-5, 5]] * dimension0)
-    function=benchmark.F62005(ndim=dimension0).evaluate
+    function=benchmark.F172005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
     for i in range(5):
@@ -293,7 +293,7 @@ if __name__=='__main__':
     # F18
     best=10
     scope = np.array([[-5, 5]] * dimension0)
-    function=benchmark.F62005(ndim=dimension0).evaluate
+    function=benchmark.F182005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
     for i in range(5):
@@ -316,7 +316,7 @@ if __name__=='__main__':
     # F19
     best=10
     scope = np.array([[-5, 5]] * dimension0)
-    function=benchmark.F62005(ndim=dimension0).evaluate
+    function=benchmark.F192005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
     for i in range(5):
@@ -339,7 +339,7 @@ if __name__=='__main__':
     # F20
     best=10
     scope = np.array([[-5, 5]] * dimension0)
-    function=benchmark.F62005(ndim=dimension0).evaluate
+    function=benchmark.F202005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
     for i in range(5):
@@ -362,7 +362,7 @@ if __name__=='__main__':
     # F21
     best=360
     scope = np.array([[-5, 5]] * dimension0)
-    function=benchmark.F62005(ndim=dimension0).evaluate
+    function=benchmark.F212005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
     for i in range(5):
@@ -385,7 +385,7 @@ if __name__=='__main__':
     # F22
     best=360
     scope = np.array([[-5, 5]] * dimension0)
-    function=benchmark.F62005(ndim=dimension0).evaluate
+    function=benchmark.F222005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
     for i in range(5):
@@ -408,7 +408,7 @@ if __name__=='__main__':
     # F23
     best=360
     scope = np.array([[-5, 5]] * dimension0)
-    function=benchmark.F62005(ndim=dimension0).evaluate
+    function=benchmark.F232005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
     for i in range(5):
@@ -431,7 +431,7 @@ if __name__=='__main__':
     # F24
     best=260
     scope = np.array([[-5, 5]] * dimension0)
-    function=benchmark.F62005(ndim=dimension0).evaluate
+    function=benchmark.F242005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
     for i in range(5):
@@ -454,7 +454,7 @@ if __name__=='__main__':
     # F25
     best=260
     scope = np.array([[-10, 10]] * dimension0)
-    function=benchmark.F62005(ndim=dimension0).evaluate
+    function=benchmark.F252005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
     for i in range(5):
