@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: sustech_ncs
+Version: 0.0.1
+Summary: A python impletation of NCS-C.
+Home-page: https://github.com/Joy-Mine/SUSTech-NCS
+Author: Yibo Yang, Jimao Shi
+Author-email: 12112222@mail.sustech.edu.cn, 12112218@mail.sustech.edu.cn
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+
+A python impletation of NCS-C.
+
+K. Tang, P. Yang and X. Yao, "Negatively Correlated Search," in IEEE Journal on Selected Areas in Communications, vol. 34, no. 3, pp. 542-550, March 2016, doi: 10.1109/JSAC.2016.2525458.
