@@ -3,7 +3,7 @@ from multiprocessing import Pool
 import matplotlib.pyplot as plt
 
 class NCS:
-    def __init__(self, objective_function, dimensions, pop_size, sigma, r, epoch, T_max, w, scope=None, plot=False):
+    def __init__(self, objective_function, dimensions=30, pop_size=10, sigma=0.2, r=0.8, epoch=10, T_max=30000, w=10, scope=None, pre_popu=None, pre_sigma=None, plot=False):
         self.objective_function_individual = objective_function
         self.dimensions = dimensions
         self.pop_size = pop_size
@@ -11,8 +11,11 @@ class NCS:
         self.r = r
         self.epoch = epoch
         self.T_max = T_max
-        self.scope=scope
         self.w = w
+        self.scope=scope
+        self.pre_popu=pre_popu
+        self.pre_sigma=pre_sigma
+        self.plot=plot
         # self.pool = Pool()
 
     def objective_function(self, population, pool):
@@ -137,6 +140,12 @@ class NCS:
         if self.plot:
             best_f_solutions = []  # 用于存储best_f_solution的历史记录
             t_values = []  # 用于存储对应的t值
+        if self.pre_popu is None:
+            population = self.initialize_population(self.pop_size, self.dimensions, self.scope)
+        else:
+            population = self.pre_popu
+        if self.pre_sigma is not None:
+            self.sigma=self.pre_sigma
         population = self.initialize_population(self.pop_size, self.dimensions, self.scope)
         count = np.full(self.pop_size, 0)
         f_population = self.objective_function(population, pool)
