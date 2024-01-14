@@ -133,21 +133,17 @@ class NCS:
         best_index = np.argmin(f_population)
         best_solution = population[best_index]
         best_f_solution = f_population[best_index]
-        # print(population)
-        # print(f_population)
-        # print(best_f_solution)
         t = 0
         while t < self.T_max:
             if t % self.epoch == 0 and t > 0:
                 self.sigma = self.update_sigma(self.pop_size, self.sigma, count, self.epoch, self.r)
             if t % self.epoch == 0 and t > 0:
                 count = np.full(self.pop_size, 0)
-            print(t)
-            # print(self.sigma)
+            # print(t)
             lambda_t = np.random.normal(1, 0.1 - 0.1 * (t / self.T_max))
             childPopulaiton, f_childPopulation = self.generateAndEvalChild(population, self.sigma, pool) 
             new_best_solution, new_best_f_solution = self.update_best(childPopulaiton, f_childPopulation)
-            print(f'allBest is {best_f_solution}, childBest is {new_best_f_solution}')
+            # print(f'allBest is {best_f_solution}, childBest is {new_best_f_solution}')
             if new_best_f_solution < best_f_solution:
                 best_solution = new_best_solution
                 best_f_solution = new_best_f_solution

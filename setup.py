@@ -5,13 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
   name="sustech_ncs",
-  version="0.0.2",
+  version="0.0.3",
   author="Yibo Yang, Jimao Shi",
   author_email="12112222@mail.sustech.edu.cn, 12112218@mail.sustech.edu.cn",
   description="A python impletation of NCS-C.",
   long_description=long_description,
   long_description_content_type="text/markdown",
-  url="https://github.com/Joy-Mine/SUSTech-NCS",
+  url="https://github.com/Joy-Mine/sustech_ncs",
   packages=setuptools.find_packages(),
   classifiers=[
   "Programming Language :: Python :: 3",

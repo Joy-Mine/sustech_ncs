@@ -1,6 +1,6 @@
 import numpy as np
-import sustech_ncs as ncs
 
+# import optproblems.cec2005 as benchmark
 import opfunu.cec_based.cec2005 as benchmark
 from sustech_ncs import NCS
 
