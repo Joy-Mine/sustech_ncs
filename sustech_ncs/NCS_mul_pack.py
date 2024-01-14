@@ -122,7 +122,12 @@ class NCS:
     # dimensions, pop_size, sigma, r, epoch, T_max
     def NCS_run(self):
         pool = Pool()
-        population = self.initialize_population(self.pop_size, self.dimensions, self.scope)
+        if self.pre_popu is None:
+            population = self.initialize_population(self.pop_size, self.dimensions, self.scope)
+        else:
+            population = self.pre_popu
+        if self.pre_sigma is not None:
+            self.sigma=self.pre_sigma
         count = np.full(self.pop_size, 0)
         f_population = self.objective_function(population, pool)
         best_index = np.argmin(f_population)
