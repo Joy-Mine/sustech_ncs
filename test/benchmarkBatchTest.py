@@ -12,7 +12,7 @@ if __name__=='__main__':
     sigma0=0.2  # 注意sigma不能是整数
     r0=0.80      #
     epoch0=10   #
-    T0=30
+    T0=30000
 
     # F6
     best=390
@@ -35,6 +35,7 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
     
     # F7
     best=-180
@@ -57,6 +58,7 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
 
     # F8
     best=-140
@@ -79,6 +81,7 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
 
     # F9
     best=-330
@@ -101,6 +104,7 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
     
     # F10
     best=-330
@@ -123,6 +127,7 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
 
     # F11
     best=90
@@ -145,6 +150,7 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
     
     # F12
     best=-460
@@ -167,6 +173,7 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
 
     # F13
     best=-130
@@ -189,6 +196,7 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
     
     # F14
     best=-300
@@ -211,6 +219,7 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
 
     # F15
     best=120
@@ -233,6 +242,7 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
     
     # F16
     best=120
@@ -255,6 +265,7 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
 
     # F17
     best=120
@@ -277,6 +288,7 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
     
     # F18
     best=10
@@ -299,6 +311,7 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
 
     # F19
     best=10
@@ -321,6 +334,7 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
     
     # F20
     best=10
@@ -343,6 +357,7 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
 
     # F21
     best=360
@@ -365,6 +380,7 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
     
     # F22
     best=360
@@ -387,6 +403,7 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
 
     # F23
     best=360
@@ -409,6 +426,7 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
     
     # F24
     best=260
@@ -431,10 +449,11 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
 
     # F25
     best=260
-    scope = np.array([[2, 5]] * dimension0)
+    scope = np.array([[-10, 10]] * dimension0)
     function=benchmark.F62005(ndim=dimension0).evaluate
 
     f_solutions=np.array([])
@@ -453,4 +472,5 @@ if __name__=='__main__':
     print("--------------------")
     print("均值：", np.mean(f_solutions)-best)
     print("标准差：", np.std(f_solutions))
+    print("--------------------\n")
     
