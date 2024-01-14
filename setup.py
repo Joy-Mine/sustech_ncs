@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
   name="sustech_ncs",
-  version="0.0.4",
+  version="0.0.5",
   author="Yibo Yang, Jimao Shi",
   author_email="12112222@mail.sustech.edu.cn, 12112218@mail.sustech.edu.cn",
   description="A python impletation of NCS-C.",
