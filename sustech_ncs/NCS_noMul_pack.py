@@ -152,12 +152,12 @@ class NCS:
                 t_values.append(t)
             t += 1
         if self.plot:
-            # 在代码的最后添加以下保存图形的代码
+            # 保存图形
             plt.plot(t_values, best_f_solutions, label='Best f_solution')
             plt.xlabel('t')
             plt.ylabel('Best f_solution')
             plt.title('Best f_solution over time')
             plt.legend()
             plt.savefig('evolution_process.png')  # 将图形保存为PNG文件
-            plt.close()  # 关闭图形显示窗口
+            plt.close()
         return best_solution, best_f_solution

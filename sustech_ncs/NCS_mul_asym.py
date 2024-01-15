@@ -121,12 +121,12 @@ class NCS:
             father_f = (best_f_solution - f_pop[i])
             child_f = (best_f_solution - f_pop_prime[i])
             child_f = child_f / (child_f + father_f + 1e-8)
-            corr_p = correlations_prime[i]/(correlations[i]+correlations_prime[i]+1e-8)
             if isGlobalPrime[i] == 0:
                 if f_pop_prime[i] < f_pop[i]:
                     new_population[i] = population_prime[i]
                     count[i] += 1
             else:
+                corr_p = correlations_prime[i]/(correlations[i]+correlations_prime[i]+1e-8)
                 if child_f / corr_p < lambda_t:
                     new_population[i] = population_prime[i]
                     count[i] += 1
@@ -181,13 +181,13 @@ class NCS:
         pool.close()
         pool.join()
         if self.plot:
-            # 在代码的最后添加以下保存图形的代码
+            # 保存图形
             plt.plot(t_values, best_f_solutions, label='Best f_solution')
             plt.xlabel('t')
             plt.ylabel('Best f_solution')
             plt.title('Best f_solution over time')
             plt.legend()
             plt.savefig('evolution_process.png')  # 将图形保存为PNG文件
-            plt.close()  # 关闭图形显示窗口
+            plt.close()
         return best_solution, best_f_solution
 

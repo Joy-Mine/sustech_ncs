@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: sustech_ncs
-Version: 0.0.5
+Version: 0.0.6
 Summary: A python impletation of NCS-C.
 Home-page: https://github.com/Joy-Mine/sustech_ncs
 Author: Yibo Yang, Jimao Shi

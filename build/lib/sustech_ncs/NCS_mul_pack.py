@@ -31,10 +31,6 @@ class NCS:
                 population[:, j] = np.random.uniform(lower_bound, upper_bound, size=pop_size)
             return population
         
-    # def gaussian_mutation_individual(self, args):
-    #     individual, sigma = args
-    #     temp = np.random.normal(0, sigma, len(individual))
-    #     return individual + temp
     def gaussian_mutation_individual(self, args):
         individual, sigma = args
         temp = np.random.normal(0, sigma, len(individual))
@@ -161,12 +157,12 @@ class NCS:
         pool.close()
         pool.join()
         if self.plot:
-            # 在代码的最后添加以下保存图形的代码
+            # 保存图形
             plt.plot(t_values, best_f_solutions, label='Best f_solution')
             plt.xlabel('t')
             plt.ylabel('Best f_solution')
             plt.title('Best f_solution over time')
             plt.legend()
             plt.savefig('evolution_process.png')  # 将图形保存为PNG文件
-            plt.close()  # 关闭图形显示窗口
+            plt.close()
         return best_solution, best_f_solution
