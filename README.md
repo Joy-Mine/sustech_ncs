@@ -1,4 +1,4 @@
-# A python impletation of NCS-C.
+# A Python impletation of NCS-C.
 
 
 
